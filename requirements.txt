@@ -1,4 +1,5 @@
-python-telegram-bot==21.7
-   python-dotenv
-openai>=1.0
-
+python-telegram-bot[job-queue]
+python-dotenv
+groq
+pytz
+aiofiles==23.2.1
