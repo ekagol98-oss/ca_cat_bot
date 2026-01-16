@@ -670,7 +670,7 @@ async def whatsnew(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(final_text)
 
 # -----------------------------------------
-# АВТОСВОДКА: 05:00 (UTC+3)
+# АВТОСВОДКА: 05:00 и 18:00 (UTC+3)
 # -----------------------------------------
 async def autosummary_job(context: ContextTypes.DEFAULT_TYPE):
     load_history()
@@ -837,6 +837,13 @@ def main():
         name="autosummary_0500",
     )
 
+    # Автосводка: 18:00 UTC+3
+    app.job_queue.run_daily(
+        autosummary_job,
+        time=time(hour=18, minute=0, tzinfo=BOT_TZ),
+        name="autosummary_1800",
+    )
+
     # Автостатистика: 05:05 UTC+3 (проверяем, что сегодня 1-е число)
     app.job_queue.run_daily(
         monthly_stats_job,
@@ -849,4 +856,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
